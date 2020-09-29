@@ -4,6 +4,9 @@ import email
 import sys
 import json
 import requests
+import colorama
+from colorama import Fore, Style
+
 
 
 class GMAIL_EXTRACTOR():
@@ -75,11 +78,26 @@ class GMAIL_EXTRACTOR():
             mail = arrmail[count-1].replace(">","").replace("<","")
             resp = requests.get('http://apilayer.net/api/check?access_key=80377f2ec0c05b53201b2d01cdf60eac&email='+mail+'&smtp=1&format=1')
             if(resp.json()['score'] > 0.5):
-               print(mail + " this email is not a spam score " + str(resp.json()['score']))
+               print(mail + Fore.GREEN + " [+] Not Spam:  Score " + str(resp.json()['score']))
             else:
-                print(mail + " this email is a spam score " + str(resp.json()['score']))
+                print(mail + Fore.RED + " [-] Possibly Spam: Score " + str(resp.json()['score']))
             raw = self.data[0][0]
             raw_str = raw.decode("utf-8")
             uid = raw_str.split()[2]
 
 
+    def __init__(self):
+        self.initializeVariables()
+        self.helloWorld()
+        self.getLogin()
+        if self.attemptLogin():
+            not self.selectMailbox() and sys.exit()
+        else:
+            sys.exit()
+        not self.checkIfUsersWantsToContinue() and sys.exit()
+        self.searchThroughMailbox()
+        self.parseEmails()
+
+
+if __name__ == "__main__":
+    run = GMAIL_EXTRACTOR()
