@@ -78,9 +78,9 @@ class GMAIL_EXTRACTOR():
             mail = arrmail[count-1].replace(">","").replace("<","")
             resp = requests.get('http://apilayer.net/api/check?access_key=80377f2ec0c05b53201b2d01cdf60eac&email='+mail+'&smtp=1&format=1')
             if(resp.json()['score'] > 0.5):
-               print(mail + Fore.GREEN + " [+] Not Spam:  Score " + str(resp.json()['score']))
+               print(Fore.GREEN + mail + " [+] Not Spam:  Score " + str(resp.json()['score']))
             else:
-                print(mail + Fore.RED + " [-] Possibly Spam: Score " + str(resp.json()['score']))
+                print(Fore.RED + mail + " [-] Possibly Spam: Score " + str(resp.json()['score']))
             raw = self.data[0][0]
             raw_str = raw.decode("utf-8")
             uid = raw_str.split()[2]
