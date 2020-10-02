@@ -2,10 +2,7 @@ Requirements:
 
 This email verification program requires a number of python libraries. The following libraries are external and will require the user to install them:
 
-imaplib
-Email
-requests
-colorama (optional, for colored text output).
+imaplib, Email, requests, and colorama (optional, for colored text output).
 
 Once the per-requisite installs are complete, the program can be ran by navigating through terminal to it's downloaded location and typing: python3 main.py
 
